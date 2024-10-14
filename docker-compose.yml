@@ -1,3 +1,4 @@
+version: '3'  # Asegúrate de tener una versión especificada
 
 services:
   reports:
@@ -8,6 +9,8 @@ services:
     ports:
       - 3001:3001
     restart: unless-stopped
+    networks:
+      - backend-network  
 
   elasticsearch:
     image: elasticsearch:7.11.1
@@ -31,6 +34,8 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+    networks:
+      - backend-network  
 
   app:
     build:
@@ -46,6 +51,11 @@ services:
       - .:/usr/app
     ports:
       - 3000:3000
+    networks:
+      - backend-network  
 
 volumes:
   esdata:
+
+networks:
+  backend-network:  # Define la red

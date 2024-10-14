@@ -14,6 +14,8 @@ export default class ReportsAPI {
 
   private static async declaracionPreview(req: Express.Request, res: Express.Response): Promise<any> {
     const scopes: string[] = req.user.scopes;
+    console.log(scopes);
+    console.log(res);
     if (!scopes.includes('DeclarationPreview:read:mine') && !scopes.includes('DeclarationPreview:read:all')) {
       return res.status(StatusCodes.UNAUTHORIZED).send({
         success: false,
